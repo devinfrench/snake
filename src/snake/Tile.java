@@ -18,6 +18,10 @@ public class Tile {
         return y;
     }
 
+    public Tile translate(int dx, int dy) {
+        return new Tile(x + dx, y + dy);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Tile) {

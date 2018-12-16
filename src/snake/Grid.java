@@ -9,6 +9,7 @@ public class Grid {
 
     private int rows;
     private int cols;
+    private Snake snake;
 
     public Grid(int width, int height) {
         rows = width / TILE_SIZE;
@@ -31,13 +32,22 @@ public class Grid {
         return cols * TILE_SIZE;
     }
 
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
+
     public void paint(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, getWidth(), getHeight());
+
+        gc.setFill(Color.DARKSEAGREEN);
+        for (Tile tile : snake.getTiles()) {
+            gc.fillRect(tile.getX() * TILE_SIZE, tile.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
     }
 
     public void update() {
-
+        snake.move();
     }
 
 }

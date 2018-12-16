@@ -1,38 +1,55 @@
 package snake;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Snake {
 
-    private int x;
-    private int y;
     private Direction dir;
-    private int length;
+    private LinkedList<Tile> occupied;
 
-    public Snake(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Snake(Tile head) {
         dir = Direction.RIGHT;
-        length = 1;
+        occupied = new LinkedList<>();
+        occupied.add(head);
     }
 
-    private void setDirection(Direction dir) {
+    public Tile getHead() {
+        return occupied.peek();
+    }
+
+    public List<Tile> getTiles() {
+        return occupied;
+    }
+
+    public void move() {
+        move(getHead().translate(dir.getX(), dir.getY()));
+    }
+
+    private void move(Tile dest) {
+        occupied.addFirst(dest);
+        occupied.removeLast();
+    }
+
+    public void setDirection(Direction dir) {
         switch (dir) {
             case UP:
-                if (length <= 1 || this.dir != Direction.DOWN) {
+                if (occupied.size() <= 1 || this.dir != Direction.DOWN) {
                     this.dir = dir;
                 }
                 break;
             case DOWN:
-                if (length <= 1 || this.dir != Direction.UP) {
+                if (occupied.size() <= 1 || this.dir != Direction.UP) {
                     this.dir = dir;
                 }
                 break;
             case LEFT:
-                if (length <= 1 || this.dir != Direction.RIGHT) {
+                if (occupied.size() <= 1 || this.dir != Direction.RIGHT) {
                     this.dir = dir;
                 }
                 break;
             case RIGHT:
-                if (length <= 1 || this.dir != Direction.LEFT) {
+                if (occupied.size() <= 1 || this.dir != Direction.LEFT) {
                     this.dir = dir;
                 }
                 break;

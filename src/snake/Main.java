@@ -13,6 +13,11 @@ public class Main extends Application {
     private static final int HEIGHT = 600;
 
     private GraphicsContext graphics;
+    private KeyHandler keyHandler;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage stage) {
@@ -20,18 +25,18 @@ public class Main extends Application {
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         graphics = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
-        canvas.setOnKeyPressed(new KeyHandler());
+        keyHandler = new KeyHandler();
+        canvas.setOnKeyPressed(keyHandler);
         root.getChildren().add(canvas);
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
 
         Grid grid = new Grid(WIDTH, HEIGHT);
+        Snake snake = new Snake(new Tile(grid.getRows() / 2, grid.getCols() / 2));
+        grid.setSnake(snake);
+        keyHandler.setSnake(snake);
         GameLoop loop = new GameLoop(graphics, grid);
         (new Thread(loop)).start();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
