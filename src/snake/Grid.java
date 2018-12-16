@@ -11,6 +11,7 @@ public class Grid {
     private int cols;
     private Snake snake;
     private Fruit fruit;
+    private int score;
 
     public Grid(int width, int height) {
         rows = width / TILE_SIZE;
@@ -78,6 +79,7 @@ public class Grid {
         if (fruit.getTile().equals(snake.getHead())) {
             snake.extend();
             fruit.respawn();
+            score += 100;
         }
     }
 
