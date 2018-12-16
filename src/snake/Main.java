@@ -34,7 +34,9 @@ public class Main extends Application {
 
         Grid grid = new Grid(WIDTH, HEIGHT);
         Snake snake = new Snake(grid, new Tile(grid.getRows() / 2, grid.getCols() / 2));
+        Fruit fruit = new Fruit(grid);
         grid.setSnake(snake);
+        grid.setFruit(fruit);
         keyHandler.setSnake(snake);
         GameLoop loop = new GameLoop(graphics, grid);
         (new Thread(loop)).start();

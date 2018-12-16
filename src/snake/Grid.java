@@ -10,6 +10,7 @@ public class Grid {
     private int rows;
     private int cols;
     private Snake snake;
+    private Fruit fruit;
 
     public Grid(int width, int height) {
         rows = width / TILE_SIZE;
@@ -34,6 +35,10 @@ public class Grid {
 
     public void setSnake(Snake snake) {
         this.snake = snake;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public Tile wrap(Tile tile) {
@@ -62,10 +67,18 @@ public class Grid {
         for (Tile tile : snake.getTiles()) {
             gc.fillRect(tile.getX() * TILE_SIZE, tile.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
+
+        gc.setFill(Color.PEACHPUFF);
+        Tile tile = fruit.getTile();
+        gc.fillRect(tile.getX() * TILE_SIZE, tile.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 
     public void update() {
         snake.move();
+        if (fruit.getTile().equals(snake.getHead())) {
+            snake.extend();
+            fruit.respawn();
+        }
     }
 
 }
