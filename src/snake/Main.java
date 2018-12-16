@@ -33,7 +33,7 @@ public class Main extends Application {
         stage.show();
 
         Grid grid = new Grid(WIDTH, HEIGHT);
-        Snake snake = new Snake(new Tile(grid.getRows() / 2, grid.getCols() / 2));
+        Snake snake = new Snake(grid, new Tile(grid.getRows() / 2, grid.getCols() / 2));
         grid.setSnake(snake);
         keyHandler.setSnake(snake);
         GameLoop loop = new GameLoop(graphics, grid);

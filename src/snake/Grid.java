@@ -36,6 +36,24 @@ public class Grid {
         this.snake = snake;
     }
 
+    public Tile wrap(Tile tile) {
+        int x = tile.getX();
+        int y = tile.getY();
+        if (x >= rows) {
+            x = 0;
+        }
+        if (y >= cols) {
+            y = 0;
+        }
+        if (x < 0) {
+            x = rows - 1;
+        }
+        if (y < 0) {
+            y = cols - 1;
+        }
+        return new Tile(x, y);
+    }
+
     public void paint(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, getWidth(), getHeight());

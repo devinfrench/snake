@@ -5,11 +5,12 @@ import java.util.List;
 
 public class Snake {
 
+    private Grid grid;
     private Direction dir;
     private LinkedList<Tile> occupied;
 
-    public Snake(Tile head) {
-        dir = Direction.RIGHT;
+    public Snake(Grid grid, Tile head) {
+        this.grid = grid;
         occupied = new LinkedList<>();
         occupied.add(head);
     }
@@ -23,7 +24,10 @@ public class Snake {
     }
 
     public void move() {
-        move(getHead().translate(dir.getX(), dir.getY()));
+        if (dir == null) {
+            return;
+        }
+        move(grid.wrap(getHead().translate(dir.getX(), dir.getY())));
     }
 
     private void move(Tile dest) {
