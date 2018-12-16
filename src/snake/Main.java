@@ -25,6 +25,10 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
+
+        Grid grid = new Grid(WIDTH, HEIGHT);
+        GameLoop loop = new GameLoop(graphics, grid);
+        (new Thread(loop)).start();
     }
 
     public static void main(String[] args) {
