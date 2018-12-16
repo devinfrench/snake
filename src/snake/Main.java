@@ -20,6 +20,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         graphics = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
+        canvas.setOnKeyPressed(new KeyHandler());
         root.getChildren().add(canvas);
         stage.setResizable(false);
         stage.setScene(new Scene(root));
