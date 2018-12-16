@@ -8,11 +8,13 @@ public class Snake {
     private Grid grid;
     private Direction dir;
     private LinkedList<Tile> occupied;
+    private boolean alive;
 
     public Snake(Grid grid, Tile head) {
         this.grid = grid;
         occupied = new LinkedList<>();
         occupied.add(head);
+        alive = true;
     }
 
     public Tile getHead() {
@@ -23,16 +25,18 @@ public class Snake {
         return occupied;
     }
 
+    public boolean isAlive() {
+        return alive;
+    }
+
     public void move() {
         if (dir == null) {
             return;
         }
-        move(grid.wrap(getHead().translate(dir.getX(), dir.getY())));
-    }
-
-    private void move(Tile dest) {
+        Tile dest = grid.wrap(getHead().translate(dir.getX(), dir.getY()));
         occupied.addFirst(dest);
         occupied.removeLast();
+        alive = !occupied.contains(getHead());
     }
 
     public void setDirection(Direction dir) {
