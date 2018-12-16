@@ -29,6 +29,7 @@ public class Main extends Application {
         canvas.setOnKeyPressed(keyHandler);
         root.getChildren().add(canvas);
         stage.setResizable(false);
+        stage.setTitle("Snake");
         stage.setOnCloseRequest(e -> System.exit(0));
         stage.setScene(new Scene(root));
         stage.show();
