@@ -34,9 +34,15 @@ public class Snake {
             return;
         }
         Tile dest = grid.wrap(getHead().translate(dir.getX(), dir.getY()));
+        alive = !occupied.contains(dest);
         occupied.addFirst(dest);
         occupied.removeLast();
-        alive = !occupied.contains(getHead());
+    }
+
+    public void extend() {
+        Tile ext = grid.wrap(getHead().translate(dir.getX(), dir.getY()));
+        alive = !occupied.contains(ext);
+        occupied.addFirst(ext);
     }
 
     public void setDirection(Direction dir) {
